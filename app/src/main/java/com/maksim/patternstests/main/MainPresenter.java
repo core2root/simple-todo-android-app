@@ -29,7 +29,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     public void addTask(){
-        Task t = new TaskBuilder().setTitle("Some title").setBody("Fucking shit").setUrgency(Task.URGENCY_NORMAL).build();
+        Task t = new TaskBuilder().setTitle("Some title 2").setBody("Fucking shit here and everywhere").setUrgency(Task.URGENCY_HIGH).build();
         mTasksRepo.addTask(t);
         getView().onTaskAdded(t);
 

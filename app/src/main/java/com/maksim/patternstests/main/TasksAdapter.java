@@ -19,9 +19,19 @@ import java.util.List;
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder> {
 
     private List<Task> mList;
+    private OnItemClickListener mOnClickListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(View v, int position);
+        void onItemLongClick(View v, int position);
+    }
 
     public TasksAdapter(List<Task> tasks){
         this.mList = tasks;
+    }
+
+    public void setItemClickListener(OnItemClickListener l){
+        this.mOnClickListener = l;
     }
 
     public void addTask(Task task){
@@ -34,6 +44,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             mList.remove(task);
             notifyDataSetChanged();
         }
+    }
+
+    public Task getItem(int position){
+        return mList.get(position);
     }
 
     @Override
@@ -56,7 +70,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
         return mList.size();
     }
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder{
+    public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
         public TextView titleTv, timeTv, bodyTv;
         public RelativeLayout wrapper;
         public TaskViewHolder(View itemView) {
@@ -65,6 +79,19 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             timeTv = itemView.findViewById(R.id.time_tv);
             bodyTv = itemView.findViewById(R.id.body_tv);
             wrapper = itemView.findViewById(R.id.wrapper);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnClickListener.onItemClick(v,getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mOnClickListener.onItemLongClick(v,getAdapterPosition());
+            return false;
         }
     }
 }

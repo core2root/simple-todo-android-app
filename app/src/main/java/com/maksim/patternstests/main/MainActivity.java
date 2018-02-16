@@ -13,7 +13,7 @@ import com.maksim.patternstests.data.model.Task;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements MainView, View.OnClickListener {
+public class MainActivity extends BaseActivity implements MainView, View.OnClickListener, TasksAdapter.OnItemClickListener {
 
     private MainPresenter mPresenter;
     private RecyclerView mRecyclerView;
@@ -46,17 +46,30 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             noTasksTv.setVisibility(View.GONE);
         }
         mAdapter = new TasksAdapter(tasks);
+        mAdapter.setItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void onTaskAdded(Task task) {
         mAdapter.addTask(task);
+        if (mAdapter.getItemCount() == 0)
+            noTasksTv.setVisibility(View.VISIBLE);
+        else{
+            noTasksTv.setVisibility(View.GONE);
+        }
+        showMessage("\""+task.getTitle()+"\""+ "was added successfully");
     }
 
     @Override
     public void onTaskDeleted(Task task) {
         mAdapter.removeTask(task);
+        if (mAdapter.getItemCount() == 0)
+            noTasksTv.setVisibility(View.VISIBLE);
+        else{
+            noTasksTv.setVisibility(View.GONE);
+        }
+        showMessage("\""+task.getTitle()+"\""+ "was deleted successfully");
     }
 
     @Override
@@ -66,5 +79,18 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 mPresenter.addTask();
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(View v, int position) {
+        Task  t = mAdapter.getItem(position);
+        showMessage(t.getTitle());
+    }
+
+    @Override
+    public void onItemLongClick(View v, int position) {
+        Task t = mAdapter.getItem(position);
+        mPresenter.deleteTask(t);
+
     }
 }
