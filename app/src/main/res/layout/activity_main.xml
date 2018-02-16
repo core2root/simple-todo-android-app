@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maksim.patternstests.main.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/no_tasks_tv"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:text="You don't have any task to show, add new one by pressing + sign in the bottom right corner."
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_margin="20dp"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/plus_ic"
+        android:id="@+id/add_task_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+</FrameLayout>
