@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Patterns Tests</string>
+    <string name="title_hint">title...</string>
+    <string name="body_hint">add task body...</string>
+    <string name="priority_title">choose priority if needed</string>
+    <string name="task_added">Task saved successfully</string>
+    <string name="empty_title_message">Task must contain title</string>
 </resources>

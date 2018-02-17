@@ -10,7 +10,7 @@ public class TaskBuilder{
     private String title;
     private long createdAt;
     private String body;
-    private int urgency;
+    private int priority;
 
     public TaskBuilder setTitle(String title) {
         this.title = title;
@@ -22,12 +22,12 @@ public class TaskBuilder{
         return this;
     }
 
-    public TaskBuilder setUrgency(int urgency) {
-        this.urgency = urgency;
+    public TaskBuilder setPriority(int priority) {
+        this.priority = priority;
         return this;
     }
 
     public Task build(){
-        return new Task(title,body,urgency);
+        return new Task(title,body,priority);
     }
 }

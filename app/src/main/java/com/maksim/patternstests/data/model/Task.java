@@ -14,9 +14,10 @@ import java.util.Date;
  @Entity(tableName = "task")
 public class Task {
 
-    public static final int URGENCY_LOW = 1;
-    public static final int URGENCY_NORMAL = 2;
-    public static final int URGENCY_HIGH = 3;
+    public static final int PRIORITY_DEFAULT = 0;
+    public static final int PRIORITY_LOW = 1;
+    public static final int PRIORITY_NORMAL = 2;
+    public static final int PRIORITY_HIGH = 3;
 
     @PrimaryKey(autoGenerate = true)
     private int uid;
@@ -24,16 +25,16 @@ public class Task {
     private String title;
     private long createdAt;
     private String body;
-    private int urgency;
+    private int priority;
 
 
-    public Task(String title, String body, int urgency){
+    public Task(String title, String body, int priority){
         this.title = title;
         this.body = body;
-        if(urgency > 3 || urgency < 1)
-            this.urgency = URGENCY_LOW;
+        if(priority > 3 || priority < 1)
+            this.priority = PRIORITY_DEFAULT;
         else
-            this.urgency = urgency;
+            this.priority = priority;
         this.createdAt = new Date().getTime();
     }
 
@@ -49,8 +50,8 @@ public class Task {
         this.body = body;
     }
 
-    public void setUrgency(int urgency) {
-        this.urgency = urgency;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public int getUid() {
@@ -73,8 +74,8 @@ public class Task {
         return body;
     }
 
-    public int getUrgency() {
-        return urgency;
+    public int getPriority() {
+        return priority;
     }
 
     public String getCreatedAtText(){
@@ -82,14 +83,15 @@ public class Task {
     }
 
     public int getBackgroundColor(){
-        switch (urgency){
-            case URGENCY_LOW:
-                return R.color.urgency_low;
-            case URGENCY_NORMAL:
-                return  R.color.urgency_normal;
-            case URGENCY_HIGH:
-                return R.color.urgency_high;
-            default: return R.color.urgency_low;
+        switch (priority){
+            case PRIORITY_LOW:
+                return R.color.priority_low;
+            case PRIORITY_NORMAL:
+                return  R.color.priority_normal;
+            case PRIORITY_HIGH:
+                return R.color.priority_high;
+            default:
+                return R.color.priority_default;
         }
     }
 }

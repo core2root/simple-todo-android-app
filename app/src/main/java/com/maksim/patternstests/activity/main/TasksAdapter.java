@@ -1,4 +1,4 @@
-package com.maksim.patternstests.main;
+package com.maksim.patternstests.activity.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -1,5 +1,6 @@
-package com.maksim.patternstests.main;
+package com.maksim.patternstests.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maksim.patternstests.R;
+import com.maksim.patternstests.activity.newtask.NewTaskActivity;
 import com.maksim.patternstests.base.BaseActivity;
 import com.maksim.patternstests.data.model.Task;
 
@@ -76,7 +78,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.add_task_iv:
-                mPresenter.addTask();
+               openNewTaskActivity();
+                //mPresenter.addTask();
                 break;
         }
     }
@@ -92,5 +95,16 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         Task t = mAdapter.getItem(position);
         mPresenter.deleteTask(t);
 
+    }
+
+    public void openNewTaskActivity(){
+        Intent intent = new Intent(this, NewTaskActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

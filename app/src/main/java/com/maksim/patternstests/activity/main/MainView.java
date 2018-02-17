@@ -1,4 +1,4 @@
-package com.maksim.patternstests.main;
+package com.maksim.patternstests.activity.main;
 
 import com.maksim.patternstests.base.BaseView;
 import com.maksim.patternstests.data.model.Task;
@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface MainView extends BaseView {
     void onTasks(List<Task> tasks);
-    void onTaskAdded(Task task);
     void onTaskDeleted(Task task);
+    void onTaskAdded(Task task);
 }
